@@ -27,6 +27,17 @@ button {
     cursor: pointer;
 }
 
+#root > button {
+    padding: 10px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+
 button:hover {
     background-color: #0056b3;
 }

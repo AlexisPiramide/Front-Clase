@@ -1,37 +1,39 @@
 import { useEffect, useState } from "react";
 import "../style/Pregunta.css"
+import BotonPregunta from './BotonPregunta'
+export default function preguntas({ pregunta, respuestas, setRespuestas, numeroPregunta, validar }) {
 
-export default function preguntas ({pregunta}){
-    
-    const [selecionada,setSelecionada] = useState(null);
+    const [selecionada, setSelecionada] = useState(null);
 
-    const [resultado, setResultado] = useState(false);    
+    const [resultado, setResultado] = useState(false);
 
     const comprobarRespuesta = () => {
-        if(selecionada){
-            if(selecionada == pregunta.respuesta){
-                setResultado(true)
-            }else{
-                setResultado(false)
-            }
+        console.log(validar)
+        if (respuestas[numeroPregunta] == pregunta.respuesta) {
+            setResultado(true)
+        } else {
+            setResultado(false)
         }
+
+    }
+    const log = () => {
+        console.log(respuestas)
     }
 
-    useEffect(comprobarRespuesta, [selecionada])
-
+    useEffect(comprobarRespuesta, [validar])
+    useEffect(log, [respuestas])
+    
     return (
         <div className="secion-pregunta">
             <h2 className="Pregunta">{pregunta.pregunta}</h2>
             <ul>
                 {pregunta.opciones.map((opcion, index) => (
-                    <li key={index+1}><button id={index+1} onClick={(e)=> {
-                        setSelecionada(Number(e.target.id))                      
-                }}>{opcion}</button></li>
-                ))}
+                <BotonPregunta numeroPregunta={numeroPregunta} key={index} index={index} opcion={opcion} selecionada={selecionada} setSelecionada={setSelecionada} resultado={resultado} setRespuestas={setRespuestas} validar={validar}/>
+            ))}
             </ul>
 
             <div className="seccion-resultado">
-                {(!selecionada)?<div/>:(resultado)?<p>Respuesta Correcta: {pregunta.explicacion}</p>:<p>Respuesta Incorrecta, la respuesta era {pregunta.respuesta} porque {pregunta.explicacion}</p>}
+                {(!validar) ? <div /> : (resultado) ? <p style={{ color: 'green' }}>Respuesta Correcta: {pregunta.explicacion}</p> : <p style={{ color: 'red' }}>Respuesta Incorrecta, la respuesta era {pregunta.respuesta} porque {pregunta.explicacion}</p>}
             </div>
         </div>
     )

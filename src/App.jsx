@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 //import './App.css'
 import Pregunta from './fragments/Pregunta'
-import PreguntaEstilos from './fragments/PreguntaEstilos'
 import {getPregunta} from './services/services.preguntas'
 
 function App() {
   const [preguntas, setPreguntas]=useState([])
+  const [respuestas, setRespuestas]=useState([])
+  const [validar, setValidar]= useState(false)
+  
 
   useEffect(()=> recogerPreguntas,[])
 
@@ -14,16 +16,14 @@ function App() {
      setPreguntas(result)
   }
 
+
+
   return (
     <>
-      <p>Estas son sin estilos</p>
       {preguntas.map((pregunta,index) => (
-        <Pregunta pregunta={pregunta} key={index} />
+        <Pregunta pregunta={pregunta} validar={validar} respuestas={respuestas} setRespuestas={setRespuestas} numeroPregunta={index} key={index} />
       ))}
-      <p>Estas son con estilos</p>
-      {preguntas.map((pregunta,index) => (
-        <PreguntaEstilos pregunta={pregunta} key={index+3} />
-      ))}
+      {(respuestas.length !== preguntas.length) ? <button style={{backgroundColor: 'gray'}}>Enviar Respuestas</button> : <button onClick={() => setValidar(!validar)} disabled={validar} style={{backgroundColor: validar?'gray':'#007bff'}}>Enviar Respuestas</button>}
     </>
   )
 }
