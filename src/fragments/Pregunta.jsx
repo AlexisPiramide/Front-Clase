@@ -8,7 +8,6 @@ export default function preguntas({ pregunta, respuestas, setRespuestas, numeroP
     const [resultado, setResultado] = useState(false);
 
     const comprobarRespuesta = () => {
-        console.log(validar)
         if (respuestas[numeroPregunta] == pregunta.respuesta) {
             setResultado(true)
         } else {
@@ -16,12 +15,8 @@ export default function preguntas({ pregunta, respuestas, setRespuestas, numeroP
         }
 
     }
-    const log = () => {
-        console.log(respuestas)
-    }
 
     useEffect(comprobarRespuesta, [validar])
-    useEffect(log, [respuestas])
     
     return (
         <div className="secion-pregunta">

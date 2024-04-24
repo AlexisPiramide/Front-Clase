@@ -8,8 +8,6 @@ export default function BotonPregunta({index,opcion, numeroPregunta, setRespuest
             updatedRespuestas[numeroPregunta] = Number(index + 1);
             return updatedRespuestas;
         });
-        
-        console.log(numeroPregunta,'numeroPregunta')
         setSelecionada(Number(index + 1));
     };
 

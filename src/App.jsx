@@ -5,7 +5,7 @@ import ExamenBoton from './fragments/ExamenBoton'
 import { getExamenes, getExamen } from './services/services.examenes'
 import LogIn from './fragments/LogIn'
 import Examen from './fragments/Examen'
-
+import ListaExamenes from './fragments/ListaExamenes'
 function App() {
 
   const [usuario, setUsuario]=useState()
@@ -13,6 +13,7 @@ function App() {
 
   const [examenes, setExamenes] = useState([])
   const [examen, setExamen] = useState()
+
   
   useEffect(() => {
     recogeExamenes(usuario)
@@ -24,24 +25,14 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(examen)
-  }, [examen])
-  /*
-  useEffect(()=> recogerPreguntas,[])
-
-  const recogerPreguntas = async () => {
-     const result = await getPregunta()
-     setPreguntas(result)
-  }
-  */
-
+    console.log(examen,'examen')
+    console.log(usuario,'usuario')
+  }, [examen,usuario])
 
   return (
     <>
       <h1>{usuario ? usuario.token : '' }</h1>
-      {usuario ? examenes.map((examenDibujar, index) => (
-          <ExamenBoton  key={index} examenDibujar={examenDibujar} setExamen={setExamen} usuario={usuario}/>
-      )) : (error ? <LogIn setError={setError} error={error} setUsuario={setUsuario}/> : <LogIn setError={setError} setUsuario={setUsuario}/>)}
+      {usuario && examen== undefined ?  <ListaExamenes usuario={usuario} examenes={examenes} setExamen={setExamen} /> : (error ? <LogIn setError={setError} error={error} setUsuario={setUsuario}/> : <LogIn setError={setError} setUsuario={setUsuario}/>)}
        <Examen examen={examen}/>
     </>
    
