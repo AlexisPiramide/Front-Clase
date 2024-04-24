@@ -9,10 +9,12 @@ const iniciarSesion = async (alias,password) => {
         body: JSON.stringify({alias:alias,password:password})
     })
     if(data.ok){
+        console.log(1)
         const json = await data.json();
+        console.log(json,'json')
         return json;
     }else{
-        console.log(1)
+        console.log(2)
         throw new Error('Usuario o contraseña incorrectos');
     }
 

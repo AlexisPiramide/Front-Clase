@@ -19,8 +19,9 @@ const getExamen = async (id, token) => {
             Authorization: `Bearer ${token.token}`
         }
     });
-    
+  
     const json = await data.json();
+    console.log(json,'json')
     return json;
 }
 
