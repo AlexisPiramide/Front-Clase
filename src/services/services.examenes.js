@@ -1,19 +1,16 @@
 import URL from "./constante.js";
 
 const getExamenes = async (token) => {
-    console.log(token)
     const data = await fetch(URL+"/api/examenes", {
         headers: {
             Authorization: `Bearer ${token.token}`
         }
     });
-   
     const json = await data.json();
     return json;
 };
 
 const getExamen = async (id, token) => {
-    console.log(token)
     const data = await fetch(URL+"/api/examenes/"+id, {
         headers: {
             Authorization: `Bearer ${token.token}`
@@ -21,10 +18,21 @@ const getExamen = async (id, token) => {
     });
   
     const json = await data.json();
-    console.log(json,'json')
+    return json;
+}
+
+const postRespuestas = async (respuestas,id,token) => {
+    const data = await fetch(URL+"/api/examenes/respuestas"+id, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        },
+        body: JSON.stringify(respuestas)
+    });
+    const json = await data.json();
     return json;
 }
 
 
   
-export { getExamenes, getExamen};
+export { getExamenes, getExamen, postRespuestas};
