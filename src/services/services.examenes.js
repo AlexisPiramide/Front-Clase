@@ -26,9 +26,10 @@ const postRespuestas = async (respuestas,id,token) => {
     const data = await fetch(URL+"/api/examenes/respuestas/"+id, {
         method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token.token}`
         },
-        body: JSON.stringify(respuestas)
+        body: JSON.stringify({respuestas})
     });
     const json = await data.json();
     return json;
