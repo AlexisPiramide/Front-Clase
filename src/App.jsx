@@ -24,16 +24,11 @@ function App() {
     setExamenes(result)
   }
 
-  useEffect(() => {
-    console.log(examen,'examen')
-    console.log(usuario,'usuario')
-  }, [examen,usuario])
-
   return (
     <>
       <h1>{usuario ? usuario.token : '' }</h1>
       {usuario && examen== undefined ?  <ListaExamenes usuario={usuario} examenes={examenes} setExamen={setExamen} /> : (error ? <LogIn setError={setError} error={error} setUsuario={setUsuario}/> : <LogIn setError={setError} setUsuario={setUsuario}/>)}
-       <Examen examen={examen}/>
+       <Examen examen={examen} usuario={usuario}/>
     </>
    
   )

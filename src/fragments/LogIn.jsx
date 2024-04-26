@@ -20,11 +20,6 @@ export default function LogIn({setUsuario, error, setError}) {
             } catch (error) {
                 setError(error);
             }
-            if(data){
-                setUsuario(data);
-            }else{
-                setError(data); 
-            }
         }
     }
 
@@ -41,6 +36,7 @@ export default function LogIn({setUsuario, error, setError}) {
             </form>
             {error ? <h3>{error.message}</h3> : ''}
         </div>
+        
     )
     
 }
